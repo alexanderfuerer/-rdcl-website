@@ -1,5 +1,5 @@
-# Use official Node.js image as the base image
-FROM node:20-alpine AS builder
+# Use official Node.js image (Debian based for better compatibility)
+FROM node:20-slim AS builder
 
 # Set working directory
 WORKDIR /app
