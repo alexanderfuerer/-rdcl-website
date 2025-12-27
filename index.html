@@ -48,9 +48,9 @@
                             "50%": { transform: "translateY(-20px)" },
                         },
                         meshFlow: {
-                            "0%": { transform: "translate(-50%, -50%) rotate(0deg)" },
-                            "50%": { transform: "translate(-48%, -52%) rotate(10deg)" },
-                            "100%": { transform: "translate(-52%, -48%) rotate(-10deg)" },
+                            "0%": { transform: "translate(-50%, -50%) rotate(0deg) scale(1)" },
+                            "50%": { transform: "translate(-49%, -51%) rotate(5deg) scale(1.05)" },
+                            "100%": { transform: "translate(-51%, -49%) rotate(-5deg) scale(1)" },
                         }
                     }
                 },
@@ -68,6 +68,16 @@
             scroll-behavior: smooth;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 0.1;
+            }
+        }
+
         .hero-grain {
             position: absolute;
             top: 0;
@@ -78,6 +88,7 @@
             opacity: 0.1;
             pointer-events: none;
             z-index: 1;
+            animation: fadeIn 2s ease-out forwards;
         }
 
         .selection\:bg-secondary-orange::selection {

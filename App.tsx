@@ -137,14 +137,19 @@ const CMSField = ({ label, value, onChange, textarea = false, type = "text" }: {
 // --- Shared UI Components ---
 
 const Logo = ({ className = "h-12", logoUrl }: { className?: string, logoUrl?: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
-    <img
-      src={logoUrl || HARDCODED_LOGO_URL}
-      alt="RDCL"
-      loading="eager"
-      className={`${className} object-contain mix-blend-multiply block`}
-      style={{ minWidth: '80px' }}
-    />
+    <div className={`${className} relative flex items-center justify-center transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <img
+        src={logoUrl || HARDCODED_LOGO_URL}
+        alt="RDCL"
+        loading="eager"
+        onLoad={() => setIsLoaded(true)}
+        className="h-full w-full object-contain mix-blend-multiply block"
+        style={{ minWidth: '80px' }}
+      />
+    </div>
   );
 };
 
@@ -287,15 +292,21 @@ const Navbar = ({
 
 const NeuralNetworkCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
+
     let animationFrameId: number;
     let particles: Particle[] = [];
     const particleCount = 100;
     const connectionDistance = 210;
+
     class Particle {
       x: number; y: number; vx: number; vy: number; radius: number; color: string; baseAlpha: number;
       constructor() {
@@ -324,11 +335,17 @@ const NeuralNetworkCanvas = () => {
         ctx!.fillStyle = this.color; ctx!.globalAlpha = this.baseAlpha; ctx!.fill();
       }
     }
+
     const init = () => {
-      canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+      const rect = container.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      canvas.width = rect.width;
+      canvas.height = rect.height;
       particles = [];
       for (let i = 0; i < particleCount; i++) particles.push(new Particle());
     };
+
     const animate = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < particles.length; i++) {
@@ -355,24 +372,40 @@ const NeuralNetworkCanvas = () => {
       }
       animationFrameId = requestAnimationFrame(animate);
     };
-    init(); animate(0);
+
+    // Use a small timeout to ensure layout is ready
+    const timer = setTimeout(() => {
+      init();
+      animate(0);
+    }, 100);
+
     const handleResize = () => init();
     window.addEventListener('resize', handleResize);
+
     return () => {
+      clearTimeout(timer);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  return <div className="relative w-full h-[650px] flex items-center justify-center"><canvas ref={canvasRef} className="w-full h-full relative z-10" /></div>;
+
+  return (
+    <div ref={containerRef} className="relative w-full h-[650px] flex items-center justify-center">
+      <canvas ref={canvasRef} className="w-full h-full relative z-10" />
+    </div>
+  );
 };
 
 const HeroLogo = ({ logoUrl }: { logoUrl: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
-    <div className="relative mb-6 pointer-events-none z-30 flex items-center justify-start">
+    <div className={`relative mb-6 pointer-events-none z-30 flex items-center justify-start transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <img
         src={logoUrl || HARDCODED_LOGO_URL}
         alt="RDCL Ink Logo"
         loading="eager"
+        onLoad={() => setIsLoaded(true)}
         className="w-[280px] md:w-[420px] h-auto object-contain mix-blend-multiply block"
       />
     </div>
