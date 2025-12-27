@@ -732,6 +732,14 @@ const AdminDashboard = ({ initialTranslations, subscribers, onSave, onClose, onD
                     </div>
                   </div>
                 </div>
+                <div className="pt-8 border-t border-white/10">
+                  <CMSField
+                    label="AI Readiness Check URL"
+                    value={data.aiReadinessUrl}
+                    onChange={v => updateActiveData(d => ({ ...d, aiReadinessUrl: v }))}
+                  />
+                  <p className="text-[10px] text-white/40 mt-2 italic">This URL is linked to the "AI Readiness Check" button in the footer.</p>
+                </div>
               </section>
             )}
 
