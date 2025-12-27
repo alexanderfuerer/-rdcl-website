@@ -1,5 +1,5 @@
-# Use official Node.js image
-FROM node:20-slim
+# Use official Node.js image (Full version for maximum compatibility)
+FROM node:20
 
 # Set working directory
 WORKDIR /app
