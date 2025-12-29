@@ -115,8 +115,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     };
 
     const publish = async () => {
-        try { setIsSaving(true); await DataService.save(transMap); onSave(transMap); onClose(); }
-        catch (err) { alert("Publish failed: Storage limit exceeded."); } finally { setIsSaving(false); }
+        try {
+            setIsSaving(true);
+            console.log("Saving Data:", JSON.stringify(transMap, null, 2)); // Debug log
+            await DataService.save(transMap);
+            onSave(transMap);
+            onClose();
+        }
+        catch (err) {
+            console.error("Publish Error:", err);
+            alert("Publish failed: Storage limit exceeded or invalid data.");
+        } finally { setIsSaving(false); }
     };
 
     const data = transMap[activeLang] || INITIAL_DATA;
