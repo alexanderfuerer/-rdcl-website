@@ -5,9 +5,10 @@ interface FooterProps {
     readinessUrl: string;
     onAdminTrigger: () => void;
     logoUrl: string;
+    onNavigate: (view: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ readinessUrl, onAdminTrigger, logoUrl }) => (
+export const Footer: React.FC<FooterProps> = ({ readinessUrl, onAdminTrigger, logoUrl, onNavigate }) => (
     <footer className="bg-[#f9f8f6] pt-12 pb-12 mt-0">
         <div className="mx-auto max-w-[1400px] px-6">
             <div className="mb-24 flex flex-col md:flex-row items-center justify-between p-12 rounded-[3rem] bg-black border border-white/5 shadow-2xl shadow-black/10">
@@ -27,8 +28,8 @@ export const Footer: React.FC<FooterProps> = ({ readinessUrl, onAdminTrigger, lo
                 <div>
                     <h4 className="font-medium text-black mb-6">Legal</h4>
                     <ul className="space-y-4 text-sm text-[#6b6965]">
-                        <li><a href="#" className="hover:text-secondary-blue transition-colors">Imprint</a></li>
-                        <li><a href="#" className="hover:text-secondary-blue transition-colors">Privacy Policy</a></li>
+                        <li><button onClick={() => onNavigate('impressum')} className="hover:text-secondary-blue transition-colors text-left">Impressum</button></li>
+                        <li><button onClick={() => onNavigate('privacy')} className="hover:text-secondary-blue transition-colors text-left">Datenschutz</button></li>
                     </ul>
                 </div>
                 <div>

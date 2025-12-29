@@ -16,6 +16,8 @@ import { InsightsSection } from './components/sections/InsightsSection';
 import { NewsletterSection } from './components/sections/NewsletterSection';
 import { AboutSection } from './components/sections/AboutSection';
 import { PartnersSection } from './components/sections/PartnersSection';
+import { Impressum } from './components/sections/Impressum';
+import { PrivacyPolicy } from './components/sections/PrivacyPolicy';
 
 // Admin Components
 import { AdminAuthModal } from './components/admin/AdminAuthModal';
@@ -35,6 +37,10 @@ const AppContent: React.FC = () => {
 
   const renderContent = () => {
     switch (currentView) {
+      case 'impressum':
+        return <Impressum />;
+      case 'privacy':
+        return <PrivacyPolicy />;
       case 'mission':
         return <MissionSection content={currentData.mission} />;
       case 'services':
@@ -76,6 +82,10 @@ const AppContent: React.FC = () => {
         readinessUrl={currentData.aiReadinessUrl}
         onAdminTrigger={openAuthModal}
         logoUrl={currentData.logoUrl}
+        onNavigate={(view) => {
+          setCurrentView(view);
+          window.scrollTo(0, 0);
+        }}
       />
 
       {isAuthModalOpen && (
