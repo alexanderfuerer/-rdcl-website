@@ -17,7 +17,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({ projects, heading, int
             </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">{projects.map((p, idx) => (
-            <div key={p.id} className="group cursor-pointer">
+            <div key={`${p.id}-${p.pdfUrl || 'nopdf'}`} className="group cursor-pointer">
                 <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-6 relative shadow-lg shadow-black/5"><img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" /></div>
                 <h3 className="font-serif text-2xl text-black mb-2 group-hover:text-secondary-blue transition-colors">{p.title}</h3>
                 <div className="text-[#6b6965] text-sm leading-relaxed mb-4">

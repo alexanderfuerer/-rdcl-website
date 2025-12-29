@@ -67,21 +67,43 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             updateActiveData(d => {
                 const next = { ...d };
                 if (target === 'logo') next.logoUrl = finalData;
-                else if (target === 'about-ceo') next.about.imageUrl = finalData;
-                else if (target === 'service-image' && index !== undefined) next.services[index].imageUrl = finalData;
-                else if (target === 'project-image' && index !== undefined) next.projects[index].image = finalData;
-                else if (target === 'project-pdf' && index !== undefined) next.projects[index].pdfUrl = finalData;
-                else if (target === 'cv-logo' && index !== undefined) next.about.cvItems[index].logoUrl = finalData;
+                else if (target === 'about-ceo') next.about = { ...next.about, imageUrl: finalData };
+                else if (target === 'service-image' && index !== undefined) {
+                    const services = [...next.services];
+                    services[index] = { ...services[index], imageUrl: finalData };
+                    next.services = services;
+                }
+                else if (target === 'project-image' && index !== undefined) {
+                    const projects = [...next.projects];
+                    projects[index] = { ...projects[index], image: finalData };
+                    next.projects = projects;
+                }
+                else if (target === 'project-pdf' && index !== undefined) {
+                    const projects = [...next.projects];
+                    projects[index] = { ...projects[index], pdfUrl: finalData };
+                    next.projects = projects;
+                }
+                else if (target === 'cv-logo' && index !== undefined) {
+                    const cvItems = [...next.about.cvItems];
+                    cvItems[index] = { ...cvItems[index], logoUrl: finalData };
+                    next.about = { ...next.about, cvItems };
+                }
                 else if (target === 'edu-logo' && index !== undefined) {
                     if (!next.about.educationItems) next.about.educationItems = [];
-                    next.about.educationItems[index].logoUrl = finalData;
+                    const eduItems = [...next.about.educationItems];
+                    eduItems[index] = { ...eduItems[index], logoUrl: finalData };
+                    next.about = { ...next.about, educationItems: eduItems };
                 }
                 else if (target === 'lecturing-logo' && index !== undefined) {
                     if (!next.about.lecturingItems) next.about.lecturingItems = [];
-                    next.about.lecturingItems[index].logoUrl = finalData;
+                    const lecItems = [...next.about.lecturingItems];
+                    lecItems[index] = { ...lecItems[index], logoUrl: finalData };
+                    next.about = { ...next.about, lecturingItems: lecItems };
                 }
                 else if (target === 'insight-pdf' && index !== undefined) {
-                    next.insights[index].downloadUrl = finalData;
+                    const insights = [...next.insights];
+                    insights[index] = { ...insights[index], downloadUrl: finalData };
+                    next.insights = insights;
                 }
                 return next;
             });
