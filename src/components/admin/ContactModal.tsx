@@ -17,7 +17,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
         setIsSubmitting(true);
         setError(null);
         try {
-            const response = await fetch("https://formsubmit.co/ajax/ale.fuerer@gmail.com", {
+            const response = await fetch("https://formsubmit.co/ajax/alex@rdcl.ai", {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Accept": "application/json" },
                 body: JSON.stringify({ name, email, message, _subject: "New Inquiry from RDCL Website", _captcha: "false" })
