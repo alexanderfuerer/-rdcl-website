@@ -10,7 +10,7 @@ export const MissionSection: React.FC<MissionSectionProps> = ({ content }) => (
     <section className="py-32 bg-[#f9f8f6]">
         <div className="mx-auto max-w-[1400px] px-6">
             <div className="max-w-[1100px] mb-20">
-                <h2 className="font-serif text-6xl md:text-[6.5rem] text-black leading-[0.9] tracking-tight mb-4">
+                <h2 className="font-serif text-5xl md:text-6xl text-black leading-[1.1] tracking-tight mb-4">
                     <FormattedText text={content.heading} />
                 </h2>
                 <div className="text-xl md:text-2xl text-[#6b6965] font-normal leading-relaxed max-w-2xl">
