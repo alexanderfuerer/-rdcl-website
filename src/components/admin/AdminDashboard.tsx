@@ -232,6 +232,40 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                             <CMSField label="Result Label" value={s.resultLabel} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].resultLabel = v; return { ...d, services: n }; })} />
                                             <CMSField label="Result Value" value={s.resultValue} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].resultValue = v; return { ...d, services: n }; })} />
                                         </div>
+
+                                        <div className="space-y-4 pt-4 border-t border-white/10">
+                                            <div className="flex justify-between items-center">
+                                                <label className="text-[10px] uppercase text-white/40">Scope of Services Box</label>
+                                                <button onClick={() => updateActiveData(d => { const n = [...d.services]; n[idx].scopeItems = [...(n[idx].scopeItems || []), '']; return { ...d, services: n }; })} className="text-xs text-secondary-blue font-bold">+ Add Item</button>
+                                            </div>
+                                            <CMSField label="Box Title" value={s.scopeTitle} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].scopeTitle = v; return { ...d, services: n }; })} />
+                                            {(s.scopeItems || []).map((item, i) => (
+                                                <div key={i} className="flex gap-2">
+                                                    <input
+                                                        className="flex-grow bg-white/10 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-white/30 transition-colors"
+                                                        value={item}
+                                                        onChange={e => updateActiveData(d => {
+                                                            const n = [...d.services];
+                                                            const items = [...(n[idx].scopeItems || [])];
+                                                            items[i] = e.target.value;
+                                                            n[idx].scopeItems = items;
+                                                            return { ...d, services: n };
+                                                        })}
+                                                    />
+                                                    <button
+                                                        onClick={() => updateActiveData(d => {
+                                                            const n = [...d.services];
+                                                            const items = [...(n[idx].scopeItems || [])];
+                                                            n[idx].scopeItems = items.filter((_, itemIdx) => itemIdx !== i);
+                                                            return { ...d, services: n };
+                                                        })}
+                                                        className="w-9 h-9 flex items-center justify-center bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all"
+                                                    >
+                                                        <span className="material-symbols-outlined text-sm">delete</span>
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 ))}
                             </section>
