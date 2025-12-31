@@ -34,20 +34,20 @@ export const NewsletterSection: React.FC<NewsletterSectionProps> = ({ onSubscrib
             <div className="mx-auto max-w-[1400px] px-6">
                 <div className="bg-white rounded-[3rem] p-12 md:p-20 shadow-xl shadow-black/[0.02] border border-black/5 flex flex-col lg:flex-row items-center justify-between gap-12">
                     <div className="max-w-2xl text-center lg:text-left">
-                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-4">Stay at the forefront of human-centered AI.</h2>
-                        <p className="text-lg text-[#6b6965] font-light">Curated insights on machine intelligence and organizational evolution, delivered monthly.</p>
+                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-4">Bleib am Ball rund um KI-Themen für KMU.</h2>
+                        <p className="text-lg text-[#6b6965] font-light">Abonniere kuratierte News aus KI-Praxis und -Entwicklung.</p>
                     </div>
                     <div className="w-full lg:w-auto lg:min-w-[400px]">
                         {status === 'success' ? (
                             <div className="flex items-center gap-3 text-secondary-green bg-secondary-green/10 p-6 rounded-2xl animate-in fade-in zoom-in-95">
                                 <span className="material-symbols-outlined">verified</span>
-                                <p className="font-medium">You're on the list. Thank you for joining us.</p>
+                                <p className="font-medium">Vielen Dank für deine Anmeldung.</p>
                             </div>
                         ) : (
                             <form onSubmit={handleSubscribe} className="relative">
-                                <input required type="email" placeholder="Your Email Address" className="w-full h-16 bg-[#f9f8f6] border-none rounded-2xl px-8 pr-40 focus:ring-2 focus:ring-secondary-blue transition-all outline-none text-lg" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <input required type="email" placeholder="Deine E-Mail-Adresse" className="w-full h-16 bg-[#f9f8f6] border-none rounded-2xl px-8 pr-40 focus:ring-2 focus:ring-secondary-blue transition-all outline-none text-lg" value={email} onChange={(e) => setEmail(e.target.value)} />
                                 <button type="submit" disabled={status === 'submitting'} className="absolute right-2 top-2 bottom-2 px-6 bg-black text-white rounded-xl font-medium text-sm hover:bg-secondary-blue transition-all disabled:opacity-50">
-                                    {status === 'submitting' ? 'Joining...' : 'Subscribe'}
+                                    {status === 'submitting' ? 'Senden...' : 'Abschicken'}
                                 </button>
                             </form>
                         )}

@@ -13,8 +13,8 @@ export const Footer: React.FC<FooterProps> = ({ readinessUrl, onAdminTrigger, lo
         <div className="mx-auto max-w-[1400px] px-6">
             <div className="mb-24 flex flex-col md:flex-row items-center justify-between p-12 rounded-[3rem] bg-black border border-white/5 shadow-2xl shadow-black/10">
                 <div className="mb-8 md:mb-0 max-w-xl">
-                    <h3 className="font-serif text-4xl mb-4 text-white">Evaluate your organization's potential.</h3>
-                    <p className="text-white/60">Discover where AI can create the most value for your team while preserving your unique human competitive edge.</p>
+                    <h3 className="font-serif text-4xl mb-4 text-white">Bewerte das KI-Potenzial deines Unternehmens.</h3>
+                    <p className="text-white/60">Finde heraus, wo KI für dich den grössten Wert schafft. Und wie dein Team sein volles Potenzial ausschöpfen kann.</p>
                 </div>
                 <a href={readinessUrl} target="_blank" rel="noopener noreferrer" className="h-14 px-10 rounded-full bg-secondary-orange text-white font-medium text-lg hover:bg-white hover:text-black transition-all transform hover:-translate-y-1 shadow-xl shadow-secondary-orange/20 flex items-center gap-2">
                     AI Readiness Check <span className="material-symbols-outlined">trending_up</span>
@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ readinessUrl, onAdminTrigger, lo
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
                 <div className="lg:col-span-2 pr-8">
                     <div className="mb-6"><Logo className="h-14" logoUrl={logoUrl} /></div>
-                    <p className="text-sm text-[#6b6965] mb-6 max-w-xs">Human Centered AI Agency. We accompany companies into a future where technology serves the human being.</p>
+                    <p className="text-sm text-[#6b6965] mb-6 max-w-xs">Human Centered AI. Wir begleiten Unternehmen in eine Zukunft, in der Künstliche Intelligenz Menschen dient.</p>
                 </div>
                 <div>
                     <h4 className="font-medium text-black mb-6">Legal</h4>

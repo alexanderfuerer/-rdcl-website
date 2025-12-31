@@ -62,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                                 onClick={openContact}
                                 className="hidden sm:block h-10 px-5 rounded-full bg-black text-white text-[15px] font-medium hover:bg-secondary-orange transition-colors"
                             >
-                                Contact Us
+                                Kontaktieren
                             </button>
 
                             <button
@@ -101,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                                 <span className="material-symbols-outlined">settings</span> Backend
                             </button>
                         )}
-                        <button onClick={() => { openContact(); setIsMenuOpen(false); }} className="w-full h-14 rounded-2xl bg-black text-white font-medium text-lg hover:bg-secondary-orange transition-colors">Contact Us</button>
+                        <button onClick={() => { openContact(); setIsMenuOpen(false); }} className="w-full h-14 rounded-2xl bg-black text-white font-medium text-lg hover:bg-secondary-orange transition-colors">Kontaktieren</button>
                     </div>
                 </div>
             </div>
