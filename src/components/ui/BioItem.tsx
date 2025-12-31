@@ -12,7 +12,7 @@ export const BioItem: React.FC<BioItemProps> = ({ role, organization, year, logo
     return (
         <div className="flex items-center gap-6 border-b border-black/5 pb-4 group">
             {logoUrl && (
-                <div className="w-12 h-12 flex-shrink-0 rounded-xl overflow-hidden bg-white shadow-sm border border-black/5 p-1.5 grayscale group-hover:grayscale-0 transition-all">
+                <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100">
                     <img src={logoUrl} alt={organization} className="w-full h-full object-contain" />
                 </div>
             )}
