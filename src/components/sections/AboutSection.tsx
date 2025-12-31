@@ -12,7 +12,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => (
         <div className="mx-auto max-w-[1400px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div className="order-2 lg:order-1">
-                    <span className="text-xs font-bold text-secondary-orange uppercase mb-6 block">The Founder</span>
+                    {/* Founder label removed */}
                     <h2 className="font-serif text-5xl md:text-7xl mb-8 leading-tight">
                         {content.ceoName}
                         <span className="block text-2xl font-sans font-medium text-[#6b6965] mt-2 italic">{content.ceoTitle}</span>
@@ -26,19 +26,25 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => (
                     </div>
 
                     <div className="space-y-8">
-                        <h3 className="font-serif text-3xl">Core Beliefs</h3>
+                        <h3 className="font-serif text-3xl">Grundsätze</h3>
                         <ul className="space-y-4">
-                            {content.beliefs?.map((b, i) => (
-                                <li key={i} className="flex items-center gap-4 text-lg group">
-                                    <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
-                                    {b}
-                                </li>
-                            ))}
+                            <li className="flex items-center gap-4 text-lg group">
+                                <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
+                                KI soll Menschen befähigen, nicht ersetzen.
+                            </li>
+                            <li className="flex items-center gap-4 text-lg group">
+                                <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
+                                KI und Automatisierung sollen Zeit für kreative, strategischere Arbeit freispielen.
+                            </li>
+                            <li className="flex items-center gap-4 text-lg group">
+                                <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
+                                Radikale Einfachheit ist die höchste Form von Eleganz.
+                            </li>
                         </ul>
                     </div>
 
                     <div className="mt-20">
-                        <h3 className="font-serif text-3xl mb-8 text-secondary-blue">Experience</h3>
+                        <h3 className="font-serif text-3xl mb-8 text-secondary-blue">Berufliche Stationen</h3>
                         <div className="space-y-6">
                             {content.cvItems?.map((item, i) => (
                                 <BioItem
@@ -55,7 +61,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => (
 
                     {content.lecturingItems && content.lecturingItems.length > 0 && (
                         <div className="mt-20">
-                            <h3 className="font-serif text-3xl mb-8 text-secondary-orange">Lecturing</h3>
+                            <h3 className="font-serif text-3xl mb-8 text-secondary-orange">Dozententätigkeit</h3>
                             <div className="space-y-6">
                                 {content.lecturingItems.map((item, i) => (
                                     <BioItem
@@ -73,7 +79,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => (
 
                     {content.educationItems && content.educationItems.length > 0 && (
                         <div className="mt-20">
-                            <h3 className="font-serif text-3xl mb-8 text-secondary-green">Education</h3>
+                            <h3 className="font-serif text-3xl mb-8 text-secondary-green">Aus- und Weiterbildung</h3>
                             <div className="space-y-6">
                                 {content.educationItems.map((item, i) => (
                                     <BioItem
