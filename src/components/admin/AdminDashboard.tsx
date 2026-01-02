@@ -225,7 +225,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                         <button className="absolute top-4 right-4 text-red-500/40 opacity-0 group-hover:opacity-100 transition-opacity" onClick={() => updateActiveData(d => ({ ...d, services: d.services.filter((_, i) => i !== idx) }))}><span className="material-symbols-outlined">delete</span></button>
                                         <div className="grid grid-cols-2 gap-4">
                                             <CMSField label="Card Subtitle" value={s.title} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].title = v; return { ...d, services: n }; })} />
-                                            <CMSField label="Icon Name (Material Symbols)" value={s.icon} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].icon = v; return { ...d, services: n }; })} />
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] uppercase text-white/40">Icon</label>
+                                                <div className="flex gap-2">
+                                                    <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center relative group/icon cursor-pointer overflow-hidden border border-white/10">
+                                                        {s.imageUrl ? <img src={s.imageUrl} className="w-full h-full object-contain p-2" /> : <span className="material-symbols-outlined text-xl">{s.icon || 'star'}</span>}
+                                                        <label className="absolute inset-0 bg-black/60 opacity-0 group-hover/icon:opacity-100 flex items-center justify-center cursor-pointer transition-opacity">
+                                                            <input type="file" className="hidden" accept="image/*" onChange={e => handleFileUpload(e, 'service-image', idx)} />
+                                                            <span className="material-symbols-outlined text-xs">upload</span>
+                                                        </label>
+                                                    </div>
+                                                    <div className="flex-grow">
+                                                        <input className="w-full bg-black/40 border border-white/10 rounded-lg h-12 px-3 text-sm outline-none focus:border-white/30 transition-colors" placeholder="Icon Name (e.g. engineering)" value={s.icon} onChange={e => updateActiveData(d => { const n = [...d.services]; n[idx].icon = e.target.value; return { ...d, services: n }; })} />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <CMSField label="Main Title" value={s.mainTitle} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].mainTitle = v; return { ...d, services: n }; })} />
                                         <CMSField label="Description" value={s.description} onChange={v => updateActiveData(d => { const n = [...d.services]; n[idx].description = v; return { ...d, services: n }; })} textarea />
