@@ -10,7 +10,7 @@ interface AboutSectionProps {
 export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => (
     <section className="py-32">
         <div className="mx-auto max-w-[1400px] px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
                 <div className="order-2 lg:order-1">
                     {/* Founder label removed */}
                     <h2 className="font-serif text-5xl md:text-7xl mb-8 leading-tight">
