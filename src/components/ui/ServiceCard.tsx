@@ -14,7 +14,7 @@ interface ServiceCardProps {
 export const ServiceCard: React.FC<ServiceCardProps> = ({ title, imageUrl, icon, resultLabel, resultValue, colorClass, bgClass }) => {
     return (
         <div className={`aspect-[4/5] ${bgClass || 'bg-[#f5f1ed]'} rounded-[2.5rem] relative flex flex-col items-center justify-start pt-20 p-8 transition-transform duration-500 group-hover/service:scale-[1.02] shadow-sm gap-8`}>
-            <div className="bg-white p-5 rounded-[2rem] shadow-sm border border-black/5 w-28 h-28 flex items-center justify-center shrink-0">
+            <div className={`bg-white rounded-[2rem] shadow-sm border border-black/5 w-28 h-28 flex items-center justify-center shrink-0 ${imageUrl ? 'p-4 overflow-hidden' : 'p-5'}`}>
                 {imageUrl ? (
                     <img src={imageUrl} className="w-full h-full object-contain" alt={title} />
                 ) : (
