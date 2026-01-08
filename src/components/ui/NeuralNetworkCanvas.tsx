@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
 export const NeuralNetworkCanvas: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const isVisibleRef = useRef(true);
+    const lastFrameTimeRef = useRef(0);
+
+    // Target ~30 FPS for better performance (33ms between frames)
+    const FRAME_INTERVAL = 33;
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -14,8 +19,9 @@ export const NeuralNetworkCanvas: React.FC = () => {
 
         let animationFrameId: number;
         let particles: Particle[] = [];
-        const particleCount = 100;
-        const connectionDistance = 210;
+        // Reduce particle count for better performance
+        const particleCount = 60;
+        const connectionDistance = 180;
 
         class Particle {
             x: number; y: number; vx: number; vy: number; radius: number; color: string; baseAlpha: number;
@@ -57,14 +63,30 @@ export const NeuralNetworkCanvas: React.FC = () => {
         };
 
         const animate = (time: number) => {
+            // Skip frame if not visible or too soon since last frame
+            if (!isVisibleRef.current) {
+                animationFrameId = requestAnimationFrame(animate);
+                return;
+            }
+
+            const elapsed = time - lastFrameTimeRef.current;
+            if (elapsed < FRAME_INTERVAL) {
+                animationFrameId = requestAnimationFrame(animate);
+                return;
+            }
+            lastFrameTimeRef.current = time;
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particles.length; i++) {
                 const p1 = particles[i]; p1.update(); p1.draw();
                 for (let j = i + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const dx = p1.x - p2.x; const dy = p1.y - p2.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < connectionDistance) {
+                    // Use squared distance to avoid expensive sqrt when possible
+                    const distanceSquared = dx * dx + dy * dy;
+                    const connectionDistanceSquared = connectionDistance * connectionDistance;
+                    if (distanceSquared < connectionDistanceSquared) {
+                        const distance = Math.sqrt(distanceSquared);
                         ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
                         const alpha = (1 - (distance / connectionDistance)) * 0.5;
                         ctx.strokeStyle = `rgba(90, 125, 163, ${alpha})`; ctx.lineWidth = 2.2; ctx.stroke();
@@ -91,10 +113,29 @@ export const NeuralNetworkCanvas: React.FC = () => {
         const handleResize = () => init();
         window.addEventListener('resize', handleResize);
 
+        // Intersection Observer to pause animation when not visible
+        const observer = new IntersectionObserver(
+            (entries) => {
+                isVisibleRef.current = entries[0]?.isIntersecting ?? true;
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(container);
+
+        // Pause when tab is hidden
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                isVisibleRef.current = false;
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
         return () => {
             clearTimeout(timer);
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', handleResize);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            observer.disconnect();
         };
     }, []);
 
