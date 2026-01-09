@@ -131,13 +131,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         try {
             setIsSaving(true);
             console.log("Saving Data:", JSON.stringify(transMap, null, 2)); // Debug log
+            console.log("Starting Firestore save...");
             await DataService.save(transMap);
+            console.log("Firestore save completed!");
             onSave(transMap);
             onClose();
         }
-        catch (err) {
+        catch (err: any) {
             console.error("Publish Error:", err);
-            alert("Publish failed: Storage limit exceeded or invalid data.");
+            alert(`Publish failed: ${err.message || 'Unknown error'}`);
         } finally { setIsSaving(false); }
     };
 

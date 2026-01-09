@@ -37,10 +37,14 @@ export const DataService = {
   async save(translations: Record<string, WebsiteData>): Promise<void> {
     try {
       const docRef = doc(db, "rdcl", "translations");
-      await setDoc(docRef, translations);
-    } catch (e) {
+      // Add timeout to prevent hanging
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Save timeout - check your connection")), 15000)
+      );
+      await Promise.race([setDoc(docRef, translations), timeoutPromise]);
+    } catch (e: any) {
       console.error("Firestore Save Error:", e);
-      throw new Error("Failed to save to database. Check your internet or permissions.");
+      throw new Error(e.message || "Failed to save to database. Check your internet or permissions.");
     }
   },
   async load(): Promise<Record<string, WebsiteData> | null> {
