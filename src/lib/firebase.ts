@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc, enableIndexedDbPersistence } from "firebase/firestore";
+import { getFirestore, doc, getDocFromServer, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { WebsiteData } from "../types";
 
@@ -26,17 +26,7 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-// Enable offline persistence for faster subsequent loads
-// Data is cached in IndexedDB and served immediately on repeat visits
-enableIndexedDbPersistence(db).catch((err) => {
-  if (err.code === 'failed-precondition') {
-    // Multiple tabs open - persistence only works in one tab
-    console.warn('Firestore persistence unavailable: multiple tabs open');
-  } else if (err.code === 'unimplemented') {
-    // Browser doesn't support persistence
-    console.warn('Firestore persistence not supported in this browser');
-  }
-});
+// Note: IndexedDB persistence disabled to ensure fresh data on each load
 
 export interface Subscriber {
   email: string;
@@ -56,7 +46,7 @@ export const DataService = {
   async load(): Promise<Record<string, WebsiteData> | null> {
     try {
       const docRef = doc(db, "rdcl", "translations");
-      const docSnap = await getDoc(docRef);
+      const docSnap = await getDocFromServer(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
         // Validate that we have the expected structure
@@ -81,7 +71,7 @@ export const DataService = {
   async loadSubscribers(): Promise<Subscriber[]> {
     try {
       const docRef = doc(db, "rdcl", "subscribers_list");
-      const docSnap = await getDoc(docRef);
+      const docSnap = await getDocFromServer(docRef);
       if (docSnap.exists()) {
         return docSnap.data().subscribers || [];
       }
