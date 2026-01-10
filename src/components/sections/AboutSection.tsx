@@ -34,7 +34,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => (
                             </li>
                             <li className="flex items-center gap-4 text-lg group">
                                 <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
-                                KI und Automatisierung sollen Zeit für kreative, strategischere Arbeit freispielen.
+                                KI und Automatisierung sollen Zeit für kreative, strategischere Arbeit freisetzen.
                             </li>
                             <li className="flex items-center gap-4 text-lg group">
                                 <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
