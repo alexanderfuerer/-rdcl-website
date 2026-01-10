@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ readinessUrl, onAdminTrigger, lo
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
                 <div className="lg:col-span-2 pr-8">
                     <div className="mb-6"><Logo className="h-14" logoUrl={logoUrl} /></div>
-                    <p className="text-sm text-[#6b6965] mb-6 max-w-xs">{isDE ? 'Human Centered AI. Wir begleiten Unternehmen in eine Zukunft, in der Künstliche Intelligenz Menschen dient.' : 'Human Centered AI. We guide companies into a future where artificial intelligence serves people.'}</p>
+                    <p className="text-sm text-[#6b6965] mb-6 max-w-xs">{isDE ? 'Human Centered AI. Wir begleiten Unternehmen in eine Zukunft, in der Künstliche Intelligenz im Dienst der Menschen steht.' : 'Human Centered AI. We guide companies into a future where artificial intelligence serves people.'}</p>
                 </div>
                 <div>
                     <h4 className="font-medium text-black mb-6">Legal</h4>
