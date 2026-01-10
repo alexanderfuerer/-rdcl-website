@@ -39,7 +39,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ content }) => {
                             </li>
                             <li className="flex items-center gap-4 text-lg group">
                                 <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
-                                {isDE ? 'KI und Automatisierung sollen Zeit für kreative, strategischere Arbeit freispielen.' : 'AI and automation should free up time for creative, strategic work.'}
+                                {isDE ? 'KI und Automatisierung sollen Zeit für kreative, strategischere Arbeit freisetzen.' : 'AI and automation should free up time for creative, strategic work.'}
                             </li>
                             <li className="flex items-center gap-4 text-lg group">
                                 <div className="w-2 h-2 rounded-full transition-all bg-secondary-orange group-hover:scale-150"></div>
